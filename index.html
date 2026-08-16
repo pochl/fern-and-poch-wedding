@@ -925,34 +925,39 @@
       return naturalH / naturalW;
     }
 
-    // Portrait ("vertical") photos are forced to the same rendered height as a
-    // two-column landscape ("large horizontal") photo, so every row lines up
-    // evenly instead of drifting out of alignment based on each photo's own
-    // aspect ratio. The vertical photo is then center-cropped (object-fit)
-    // to that height rather than stretched.
+    // Single-column landscape photos ("small horizontal") set the "short" row
+    // height from their own natural crop. Every portrait photo AND every
+    // two-column "feature" photo is then forced to exactly twice that short
+    // height plus the row gap — the same vertical space two short photos take
+    // up when stacked — so a tall photo always lines up flush with whatever
+    // is beside it, whether that's another tall photo or two short ones
+    // stacked in a neighboring column. Forced photos are center-cropped
+    // (object-fit) to that height rather than stretched.
     const landscapeItem = items.find(it => naturalRatio(it) < 1);
     const landscapeRatio = landscapeItem ? naturalRatio(landscapeItem) : 506 / 760;
-    const largeHorizontalWidth = colWidth * 2 + gap - hPad;
-    const verticalImgHeight = largeHorizontalWidth * landscapeRatio;
+    const shortImgHeight = (colWidth - hPad) * landscapeRatio;
+    const shortItemHeight = shortImgHeight + vPad;
+    const tallItemHeight = shortItemHeight * 2 + gap;
+    const tallImgHeight = tallItemHeight - vPad;
 
     function dims(item){
       const span = Math.min(item.classList.contains('gallery-item--feature') ? 2 : 1, cols);
       const itemWidth = colWidth * span + gap * (span - 1);
       const imgWidth = itemWidth - hPad;
-      const isPortrait = naturalRatio(item) > 1;
-      const imgHeight = isPortrait ? verticalImgHeight : imgWidth * naturalRatio(item);
-      return { span, itemWidth, imgWidth, imgHeight, isPortrait, itemHeight: imgHeight + vPad };
+      const isTall = naturalRatio(item) > 1 || span > 1;
+      const imgHeight = isTall ? tallImgHeight : imgWidth * naturalRatio(item);
+      return { span, itemWidth, imgWidth, imgHeight, isTall, itemHeight: imgHeight + vPad };
     }
 
     function place(item, startCol){
-      const { span, itemWidth, imgWidth, imgHeight, isPortrait, itemHeight } = dims(item);
+      const { span, itemWidth, imgWidth, imgHeight, isTall, itemHeight } = dims(item);
       const top = Math.max(...colHeights.slice(startCol, startCol + span));
       const left = startCol * (colWidth + gap);
       item.style.width = itemWidth + 'px';
       item.style.left = left + 'px';
       item.style.top = top + 'px';
       item.classList.add('placed');
-      if(isPortrait){
+      if(isTall){
         const img = item.querySelector('img');
         img.style.height = imgHeight + 'px';
         img.style.width = imgWidth + 'px';
