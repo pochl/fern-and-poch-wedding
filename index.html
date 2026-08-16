@@ -460,6 +460,26 @@
   }
   .gallery-item.gallery-item--feature{ --tilt:-1deg; }
 
+  /* Dev-only image index badges — hidden unless <body> has .dev-labels.
+     Toggle with ?dev=1 in the URL or Alt+L at runtime. */
+  .gallery-item::before{
+    content: attr(data-label);
+    display:none;
+    position:absolute;
+    top:0.3rem; left:0.3rem;
+    z-index:5;
+    font-family:var(--caps);
+    font-size:0.7rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:#fff;
+    background:rgba(200,30,30,0.85);
+    padding:0.1rem 0.45rem;
+    border-radius:3px;
+    pointer-events:none;
+  }
+  body.dev-labels .gallery-item::before{ display:block; }
+
   /* ---------- RSVP ---------- */
   .rsvp{
     background:var(--cream);
@@ -682,23 +702,23 @@
 <section class="gallery-wrap reveal">
   <div class="gallery-grid">
    <div class="gallery-grid-inner">
-    <div class="gallery-item"><img src="images/gallery-disney-01-toy-story-land.jpg" width="506" height="760" alt="Fern and Poch at Toy Story Land" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature"><img src="images/gallery-disney-02-main-street.jpg" width="760" height="506" alt="Fern and Poch on Main Street" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-03-mickey-mouse.jpg" width="760" height="506" alt="Fern and Poch with Mickey Mouse" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature gallery-item--left"><img src="images/gallery-disney-04-castle.jpg" width="760" height="506" alt="Fern and Poch by the castle" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-05-ride.jpg" width="760" height="506" alt="Fern and Poch on a ride" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-06-carousel.jpg" width="506" height="760" alt="Fern and Poch on the carousel" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-07-fireworks.jpg" width="760" height="506" alt="Fern and Poch under fireworks" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-08-together.jpg" width="506" height="760" alt="Fern and Poch together" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-09-sunset-boulevard.jpg" width="760" height="506" alt="Fern and Poch on Sunset Boulevard" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-10-laughing.jpg" width="760" height="506" alt="Fern and Poch laughing together" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-11-minnie-plush.jpg" width="760" height="506" alt="Fern and Poch with a Minnie Mouse plush" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-12-winnie-the-pooh.jpg" width="760" height="506" alt="Fern and Poch with Winnie the Pooh" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature gallery-item--right"><img src="images/gallery-disney-13-carousel-night.jpg" width="760" height="506" alt="Fern and Poch by the carousel at night" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-14-tigger.jpg" width="760" height="506" alt="Fern and Poch with Tigger" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-15-holding-hands.jpg" width="760" height="506" alt="Fern and Poch holding hands on Main Street" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature gallery-item--left"><img src="images/gallery-disney-16-piggyback.jpg" width="760" height="506" alt="Fern and Poch piggyback moment" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-disney-17-beasts-castle.jpg" width="506" height="760" alt="Fern and Poch on the bridge to the Beast's castle" loading="lazy"></div>
+    <div class="gallery-item" data-label="1"><img src="images/gallery-disney-01-toy-story-land.jpg" width="506" height="760" alt="Fern and Poch at Toy Story Land" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature" data-label="2"><img src="images/gallery-disney-02-main-street.jpg" width="760" height="506" alt="Fern and Poch on Main Street" loading="lazy"></div>
+    <div class="gallery-item" data-label="3"><img src="images/gallery-disney-03-mickey-mouse.jpg" width="760" height="506" alt="Fern and Poch with Mickey Mouse" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature gallery-item--left" data-label="4"><img src="images/gallery-disney-04-castle.jpg" width="760" height="506" alt="Fern and Poch by the castle" loading="lazy"></div>
+    <div class="gallery-item" data-label="5"><img src="images/gallery-disney-05-ride.jpg" width="760" height="506" alt="Fern and Poch on a ride" loading="lazy"></div>
+    <div class="gallery-item" data-label="6"><img src="images/gallery-disney-06-carousel.jpg" width="506" height="760" alt="Fern and Poch on the carousel" loading="lazy"></div>
+    <div class="gallery-item" data-label="7"><img src="images/gallery-disney-07-fireworks.jpg" width="760" height="506" alt="Fern and Poch under fireworks" loading="lazy"></div>
+    <div class="gallery-item" data-label="8"><img src="images/gallery-disney-08-together.jpg" width="506" height="760" alt="Fern and Poch together" loading="lazy"></div>
+    <div class="gallery-item" data-label="9"><img src="images/gallery-disney-09-sunset-boulevard.jpg" width="760" height="506" alt="Fern and Poch on Sunset Boulevard" loading="lazy"></div>
+    <div class="gallery-item" data-label="10"><img src="images/gallery-disney-10-laughing.jpg" width="760" height="506" alt="Fern and Poch laughing together" loading="lazy"></div>
+    <div class="gallery-item" data-label="11"><img src="images/gallery-disney-11-minnie-plush.jpg" width="760" height="506" alt="Fern and Poch with a Minnie Mouse plush" loading="lazy"></div>
+    <div class="gallery-item" data-label="12"><img src="images/gallery-disney-12-winnie-the-pooh.jpg" width="760" height="506" alt="Fern and Poch with Winnie the Pooh" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature gallery-item--right" data-label="13"><img src="images/gallery-disney-13-carousel-night.jpg" width="760" height="506" alt="Fern and Poch by the carousel at night" loading="lazy"></div>
+    <div class="gallery-item" data-label="14"><img src="images/gallery-disney-14-tigger.jpg" width="760" height="506" alt="Fern and Poch with Tigger" loading="lazy"></div>
+    <div class="gallery-item" data-label="15"><img src="images/gallery-disney-15-holding-hands.jpg" width="760" height="506" alt="Fern and Poch holding hands on Main Street" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature gallery-item--left" data-label="16"><img src="images/gallery-disney-16-piggyback.jpg" width="760" height="506" alt="Fern and Poch piggyback moment" loading="lazy"></div>
+    <div class="gallery-item" data-label="17"><img src="images/gallery-disney-17-beasts-castle.jpg" width="506" height="760" alt="Fern and Poch on the bridge to the Beast's castle" loading="lazy"></div>
    </div>
   </div>
 </section>
@@ -775,13 +795,13 @@
 <section class="gallery-wrap gallery-wrap--light reveal">
   <div class="gallery-grid">
    <div class="gallery-grid-inner">
-    <div class="gallery-item"><img src="images/gallery-beach-01-golden-hour.jpg" width="506" height="760" alt="Fern and Poch by the water at golden hour" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature gallery-item--right"><img src="images/gallery-beach-02-sunset-hands.jpg" width="760" height="506" alt="Fern and Poch holding hands at sunset" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-beach-03-dancing.jpg" width="506" height="760" alt="Fern and Poch dancing on the beach" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-beach-04-veil.jpg" width="506" height="760" alt="Fern and Poch adjusting the veil on the beach" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-beach-05-shore-walk.jpg" width="506" height="760" alt="Fern and Poch walking along the shore" loading="lazy"></div>
-    <div class="gallery-item gallery-item--feature"><img src="images/gallery-beach-06-bouquet.jpg" width="760" height="506" alt="Fern and Poch forehead to forehead with a bouquet" loading="lazy"></div>
-    <div class="gallery-item"><img src="images/gallery-beach-07-in-water.jpg" width="506" height="760" alt="Fern and Poch standing together in the water" loading="lazy"></div>
+    <div class="gallery-item" data-label="1"><img src="images/gallery-beach-01-golden-hour.jpg" width="506" height="760" alt="Fern and Poch by the water at golden hour" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature gallery-item--right" data-label="2"><img src="images/gallery-beach-02-sunset-hands.jpg" width="760" height="506" alt="Fern and Poch holding hands at sunset" loading="lazy"></div>
+    <div class="gallery-item" data-label="3"><img src="images/gallery-beach-03-dancing.jpg" width="506" height="760" alt="Fern and Poch dancing on the beach" loading="lazy"></div>
+    <div class="gallery-item" data-label="4"><img src="images/gallery-beach-04-veil.jpg" width="506" height="760" alt="Fern and Poch adjusting the veil on the beach" loading="lazy"></div>
+    <div class="gallery-item" data-label="5"><img src="images/gallery-beach-05-shore-walk.jpg" width="506" height="760" alt="Fern and Poch walking along the shore" loading="lazy"></div>
+    <div class="gallery-item gallery-item--feature" data-label="6"><img src="images/gallery-beach-06-bouquet.jpg" width="760" height="506" alt="Fern and Poch forehead to forehead with a bouquet" loading="lazy"></div>
+    <div class="gallery-item" data-label="7"><img src="images/gallery-beach-07-in-water.jpg" width="506" height="760" alt="Fern and Poch standing together in the water" loading="lazy"></div>
    </div>
   </div>
 </section>
@@ -1001,6 +1021,17 @@
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(layoutAllGalleries, 150);
+  });
+
+  // Dev-only gallery index badges (see .gallery-item::before above).
+  // Off by default. Turn on via ?dev=1 in the URL, or toggle with Alt+L.
+  if(new URLSearchParams(location.search).get('dev') === '1'){
+    document.body.classList.add('dev-labels');
+  }
+  window.addEventListener('keydown', (e) => {
+    if(e.altKey && e.key.toLowerCase() === 'l'){
+      document.body.classList.toggle('dev-labels');
+    }
   });
 </script>
 
