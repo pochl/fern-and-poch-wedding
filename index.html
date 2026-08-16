@@ -445,12 +445,8 @@
   .gallery-wrap--light .gallery-item{
     border:1px solid rgba(16,26,48,0.12);
   }
-  .gallery-item:nth-child(odd){ --tilt:-1.6deg; }
-  .gallery-item:nth-child(even){ --tilt:1.4deg; }
-  .gallery-item:nth-child(3n){ --tilt:-0.7deg; }
-  .gallery-item{ transform:rotate(var(--tilt, 0deg)); }
   .gallery-item:hover{
-    transform:rotate(0deg) scale(1.04);
+    transform:scale(1.04);
     z-index:2;
   }
   .gallery-item img{
@@ -458,7 +454,6 @@
     height:auto;
     display:block;
   }
-  .gallery-item.gallery-item--feature{ --tilt:-1deg; }
 
   /* Dev-only image index badges — hidden unless <body> has .dev-labels.
      Toggle with ?dev=1 in the URL or Alt+L at runtime. */
