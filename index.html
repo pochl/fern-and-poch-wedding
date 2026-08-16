@@ -437,7 +437,7 @@
   .gallery-item{
     position:absolute;
     background:var(--cream);
-    padding:0.45rem 0.45rem 1rem;
+    padding:0.45rem;
     transition:transform 0.3s ease, left 0.3s ease, top 0.3s ease, width 0.3s ease;
     opacity:0;
   }
@@ -913,8 +913,8 @@
     const containerWidth = GALLERY_REFERENCE_WIDTH;
     const cols = 3;
     const gap = 20.8;
-    const hPad = 14.4;   // left+right padding of the polaroid mat
-    const vPad = 23.2;   // top+bottom padding of the polaroid mat
+    const hPad = 14.4;   // left+right padding of the photo mat
+    const vPad = 14.4;   // top+bottom padding of the photo mat (equal on all sides)
     const colWidth = (containerWidth - gap * (cols - 1)) / cols;
     const colHeights = new Array(cols).fill(0);
 
