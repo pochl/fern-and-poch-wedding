@@ -438,16 +438,12 @@
     position:absolute;
     background:var(--cream);
     padding:0.45rem;
-    transition:transform 0.3s ease, left 0.3s ease, top 0.3s ease, width 0.3s ease;
+    transition:left 0.3s ease, top 0.3s ease, width 0.3s ease;
     opacity:0;
   }
   .gallery-item.placed{ opacity:1; }
   .gallery-wrap--light .gallery-item{
     border:1px solid rgba(16,26,48,0.12);
-  }
-  .gallery-item:hover{
-    transform:scale(1.04);
-    z-index:2;
   }
   .gallery-item img{
     width:100%;
