@@ -6,6 +6,8 @@
 //
 // Setup: see ../google-apps-script/README.md for deployment steps.
 
+const SHEET_NAME = 'RSVP Responses';
+
 const HEADERS = [
   'Timestamp',
   'Full Name',
@@ -19,7 +21,8 @@ const HEADERS = [
 ];
 
 function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
   const p = (e && e.parameter) || {};
 
   // Honeypot: a hidden field real visitors never fill in. Bots that blindly

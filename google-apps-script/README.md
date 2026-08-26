@@ -5,10 +5,14 @@ opening an email draft.
 
 ## 1. Create the Sheet
 
-1. Go to [sheets.google.com](https://sheets.google.com) → **Blank spreadsheet**.
+1. Go to [sheets.google.com](https://sheets.google.com) → **Blank spreadsheet**
+   (or use an existing spreadsheet that already has other tabs in it — the
+   script only ever touches its own tab, described next).
 2. Rename it (top-left) to something like **Fern & Poch RSVPs**.
-3. Leave it otherwise empty — the script fills in the header row itself on
-   the first submission.
+3. Make sure there's a tab (bottom of the screen) named exactly
+   **RSVP Responses** — right-click any tab → **Rename**, or add a new one
+   with the `+` button. If it doesn't exist yet, the script creates it
+   automatically on the first submission, so this step is optional.
 
 ## 2. Add the script
 
