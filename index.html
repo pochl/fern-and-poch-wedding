@@ -729,6 +729,11 @@
 
   <form id="rsvpForm" class="rsvp-form" novalidate>
 
+    <div class="field" style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+      <label for="website">Website</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
     <div class="field">
       <label for="fullName">Full Name</label>
       <input type="text" id="fullName" name="fullName" required>
@@ -863,10 +868,15 @@
     });
   });
 
-  // RSVP form -> compile answers into an email
+  // RSVP form -> submit to a Google Sheet via an Apps Script web app.
+  // The endpoint doesn't send CORS headers back, so the request is fired
+  // with mode:'no-cors': the browser still delivers it, we just can't read
+  // the response — the .then() only tells us the request went out, not
+  // that the server accepted it, so the success message is optimistic.
   const rsvpForm = document.getElementById('rsvpForm');
   const formStatus = document.getElementById('formStatus');
-  const RSVP_EMAIL = 'youremail@example.com';
+  const rsvpBtn = rsvpForm.querySelector('.rsvp-btn');
+  const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxvkwcsk3gAZgKMbgvsxQOzZ8zDVQlpaK4CL0NSgYCRqmqYxP3eqZztrxdd93UB0WmT6g/exec';
 
   rsvpForm.addEventListener('submit', function(e){
     e.preventDefault();
@@ -874,24 +884,24 @@
       rsvpForm.reportValidity();
       return;
     }
-    const data = new FormData(rsvpForm);
-    const get = (k)=> (data.get(k) || '').toString().trim();
 
-    const lines = [
-      `Full Name: ${get('fullName')}`,
-      `Nickname: ${get('nickname') || '-'}`,
-      `Attending: ${get('attending')}`,
-      `Side: ${get('side')}`,
-      `Plus One: ${get('plusOne')}${get('plusOne')==='Yes' ? ' (' + (get('plusOneName') || 'name not given') + ')' : ''}`,
-      `Food Allergy: ${get('allergy') || '-'}`,
-      `Message: ${get('message') || '-'}`
-    ];
+    rsvpBtn.disabled = true;
+    formStatus.textContent = "Sending your RSVP…";
 
-    const subject = encodeURIComponent(`RSVP - ${get('fullName')}`);
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:${RSVP_EMAIL}?subject=${subject}&body=${body}`;
-
-    formStatus.textContent = "Your reply is ready — please hit send in the email that just opened.";
+    fetch(RSVP_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new FormData(rsvpForm)
+    }).then(function(){
+      formStatus.textContent = "Thank you — your RSVP has been received!";
+      rsvpForm.reset();
+      plusOneField.hidden = true;
+      plusOneInput.required = false;
+      rsvpBtn.disabled = false;
+    }).catch(function(){
+      formStatus.textContent = "Something went wrong — please try again, or email us directly.";
+      rsvpBtn.disabled = false;
+    });
   });
 
   // Gallery masonry — packs photos of any aspect ratio with no gaps,
