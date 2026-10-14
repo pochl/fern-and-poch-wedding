@@ -2,7 +2,7 @@
 
 A single-page wedding invitation site with a Disney-inspired fairy-tale theme.
 
-- **Wedding date:** Saturday, 09 January 2027, 6:00 PM — Hilton Sukhumvit Bangkok Hotel
+- **Wedding date:** Saturday, 09 January 2027, 6:00 PM — Pullman Bangkok King Power Hotel
 - **Color palette:** navy (`#101a30`) & gold (`#c9a66b`) for the dark sections, cream (`#f8f3e8`) for the light sections — evokes an elegant storybook/fairy-tale feel
 - **Theme:** Disney/fairy-tale, with a live countdown to the reception and "happily ever after" styling throughout
 
